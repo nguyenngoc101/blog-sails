@@ -7,7 +7,7 @@
 
 module.exports = {
 	getSignup: function(req, res) {
-		res.view();
+		res.view('user/signup');
 	},
 
 	signup: function(req, res) {
