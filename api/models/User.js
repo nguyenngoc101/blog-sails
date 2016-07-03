@@ -9,9 +9,16 @@ module.exports = {
 
   attributes: {
   	provider: 'string',
+  	facebookId: 'string',
+  	uuid: 'string',
   	username: 'string',
+  	firstName: 'string',
+  	lastName: 'string',
   	email: 'string',
-  	password: 'string'
+  	password: 'string',
+  	createdAt: 'date',
+  	modifiedAt: 'date',
+  	avatar: 'string'
   }
 };
 
