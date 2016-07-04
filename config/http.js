@@ -10,7 +10,8 @@
  */
 
 var passport = require('passport')
-    , FacebookStrategy = require('passport-facebook').Strategy;
+    , FacebookStrategy = require('passport-facebook').Strategy,
+    uuid = require('node-uuid');
     
 
 
@@ -25,6 +26,7 @@ var verifyHandler = function(token, tokenSecret, profile, done) {
         var data = {
           provider: profile.provider,
           uid: profile.id,
+          uuid: uuid.v4(),
           name: profile.displayName
         };
 
@@ -64,6 +66,7 @@ module.exports.http = {
       clientID: "449272895255080",
     clientSecret: "25874100c9c1619825109b9d8220d905",
     callbackURL: "http://localhost:1337/auth/facebook/callback",
+    profileFields: ['id', 'emails', 'name']
     }, verifyHandler));
 
     app.use(passport.initialize());
