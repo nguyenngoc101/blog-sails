@@ -43,6 +43,10 @@ module.exports = {
 	        function (req, res) {
 	            res.redirect('/user/dashboard');
 	        })(req, res, next);
+	  },
+
+	  dashboard: function(req, res) {
+	  	res.json(req.user);
 	  }
 
 };
