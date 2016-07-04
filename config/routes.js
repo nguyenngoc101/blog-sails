@@ -45,11 +45,11 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-  'get /signup': 'UserController.getSignup',
-  'post /signup': 'UserController.signup',
+  'get /signup': 'AuthController.getSignup',
+  'post /signup': 'AuthController.signup',
   'get /login': {view: 'user/login'},
-  'post /login': 'UserController.login',
-  '/logout': 'UserController.logout',
-  '/user/dashboard': 'UserController.dashboard'
+  'post /login': 'AuthController.login',
+  '/logout': 'AuthController.logout',
+  '/user/dashboard': 'AuthController.dashboard'
 
 };
