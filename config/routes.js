@@ -50,6 +50,6 @@ module.exports.routes = {
   'get /login': {view: 'user/login'},
   'post /login': 'AuthController.login',
   '/logout': 'AuthController.logout',
-  '/user/dashboard': 'AuthController.dashboard'
+  '/dashboard': 'AuthController.dashboard'
 
 };

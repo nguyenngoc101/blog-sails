@@ -27,11 +27,11 @@ module.exports = {
 	        function (err, user) {
 	            req.logIn(user, function (err) {
 	            if(err) {
-	                req.session.flash = 'There was an error';
-	                res.redirect('auth/login');
+	            	console.log(err);
+	                res.redirect('/login');
 	            } else {
 	                req.session.user = user;
-	                res.redirect('/auth/dashboard');
+	                res.redirect('/dashboard');
 	            }
 	        });
 	    })(req, res, next);

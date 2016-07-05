@@ -10,10 +10,11 @@
  */
 
 var passport = require('passport')
+
     , TwitterStrategy = require('passport-twitter').Strategy
     , LocalStrategy = require('passport-local').Strategy
     , FacebookStrategy = require('passport-facebook').Strategy;
-    
+ 
 
 var localVerifyHandler = function (username, password, done) {
   User.findOne({email: username}, function(err, user) {
@@ -44,6 +45,7 @@ var verifyHandler = function(token, tokenSecret, profile, done) {
         var data = {
           provider: profile.provider,
           uid: profile.id,
+          uuid: uuid.v4(),
           name: profile.displayName
         };
 
@@ -103,6 +105,7 @@ module.exports.http = {
       callbackURL: "http://localhost:1337/auth/facebook/callback", */
       }, verifyHandler));
     }
+
 
     app.use(passport.initialize());
     app.use(passport.session());
