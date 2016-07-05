@@ -17,8 +17,36 @@ module.exports = {
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
-  // models: {
-  //   connection: 'someMongodbServer'
-  // }
+  models: {
+    connection: 'someMongodbServer'
+  },
 
-};
+	connections: {
+	    someMongodbServer: { 
+	    adapter: 'sails-mongo',
+	    host: 'localhost', // defaults to `localhost` if omitted
+	    port: 27017, // defaults to 27017 if omitted
+	    user: 'ngocnv', // or omit if not relevant
+	    password: '123456', // or omit if not relevant
+	    database: 'blog' // or omit if not relevant
+	}
+  },
+
+  application_auth: {
+
+        enableLocalAuth: true,
+
+        // Get your keys from https://apps.twitter.com/
+        enableTwitterAuth: false,
+        twitterConsumerKey: "",
+        twitterSecretKey: "",
+        twitterCallbackURL: "http://localhost:1337/auth/twitter/callback",
+
+        // Get your keys from https://developers.facebook.com/apps/
+        enableFacebookAuth: true,
+        facebookClientID: "449272895255080",
+        facebookClientSecret: "25874100c9c1619825109b9d8220d905",
+        facebookCallbackURL: "http://localhost:1337/auth/facebook/callback"
+    }
+
+}

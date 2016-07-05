@@ -10,9 +10,28 @@
  */
 
 var passport = require('passport')
+    , TwitterStrategy = require('passport-twitter').Strategy
+    , LocalStrategy = require('passport-local').Strategy
     , FacebookStrategy = require('passport-facebook').Strategy;
     
 
+var localVerifyHandler = function (username, password, done) {
+  User.findOne({email: username}, function(err, user) {
+    if (err) {
+      return done(err);
+    }
+
+    if (!user) {
+      return done(null, false, {message: 'Incorrect username.'});
+    }
+
+    if (!User.validPassword(user, password)) {
+      return done(null, false, {message: 'Incorrect password'});
+    }
+
+    return done(null, user);
+  });
+}
 
 var verifyHandler = function(token, tokenSecret, profile, done) {
   process.nextTick(function() {
@@ -60,11 +79,30 @@ module.exports.http = {
 
   customMiddleware: function(app) {
 
-    passport.use(new FacebookStrategy({
+    if (sails.config.application_auth.enableLocalAuth) {
+      passport.use(new LocalStrategy(localVerifyHandler));
+    }
+
+    if (sails.config.application_auth.enableTwitterAuth) {
+      passport.use(new TwitterStrategy({
+                consumerKey: sails.config.application_auth.twitterConsumerKey,
+                consumerSecret: sails.config.application_auth.twitterSecretKey,
+                callbackURL: sails.config.application_auth.twitterCallbackURL
+            }, verifyHandler));
+
+    }
+
+    if (sails.config.application_auth.enableFacebookAuth) {
+      passport.use(new FacebookStrategy({
+        clientID: sails.config.application_auth.facebookClientID,
+        clientSecret: sails.config.application_auth.facebookClientSecret,
+        callbackURL: sails.config.application_auth.facebookCallbackURL
+        /*
       clientID: "449272895255080",
-    clientSecret: "25874100c9c1619825109b9d8220d905",
-    callbackURL: "http://localhost:1337/auth/facebook/callback",
-    }, verifyHandler));
+      clientSecret: "25874100c9c1619825109b9d8220d905",
+      callbackURL: "http://localhost:1337/auth/facebook/callback", */
+      }, verifyHandler));
+    }
 
     app.use(passport.initialize());
     app.use(passport.session());
