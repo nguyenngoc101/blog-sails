@@ -27,7 +27,6 @@ module.exports = {
 	        function (err, user) {
 	            req.logIn(user, function (err) {
 	            if(err) {
-	            	console.log(err);
 	                res.redirect('/login');
 	            } else {
 	                req.session.user = user;
