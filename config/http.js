@@ -10,7 +10,7 @@
  */
 
 var passport = require('passport')
-
+    , uuid = require('node-uuid')
     , TwitterStrategy = require('passport-twitter').Strategy
     , LocalStrategy = require('passport-local').Strategy
     , FacebookStrategy = require('passport-facebook').Strategy;
@@ -98,7 +98,8 @@ module.exports.http = {
       passport.use(new FacebookStrategy({
         clientID: sails.config.application_auth.facebookClientID,
         clientSecret: sails.config.application_auth.facebookClientSecret,
-        callbackURL: sails.config.application_auth.facebookCallbackURL
+        callbackURL: sails.config.application_auth.facebookCallbackURL,
+        profileFields: ['id', 'emails', 'name'] //This
         /*
       clientID: "449272895255080",
       clientSecret: "25874100c9c1619825109b9d8220d905",
@@ -109,7 +110,7 @@ module.exports.http = {
 
     app.use(passport.initialize());
     app.use(passport.session());
-  }
+  },
 
 
   /****************************************************************************
@@ -122,7 +123,7 @@ module.exports.http = {
   *                                                                           *
   ****************************************************************************/
 
-  // middleware: {
+  middleware: {
 
   /***************************************************************************
   *                                                                          *
@@ -131,23 +132,23 @@ module.exports.http = {
   *                                                                          *
   ***************************************************************************/
 
-    // order: [
-    //   'startRequestTimer',
-    //   'cookieParser',
-    //   'session',
-    //   'myRequestLogger',
-    //   'bodyParser',
-    //   'handleBodyParserError',
-    //   'compress',
-    //   'methodOverride',
-    //   'poweredBy',
-    //   '$custom',
-    //   'router',
-    //   'www',
-    //   'favicon',
-    //   '404',
-    //   '500'
-    // ],
+    order: [
+      'startRequestTimer',
+      'cookieParser',
+      'session',
+      'myRequestLogger',
+      'bodyParser',
+      'handleBodyParserError',
+      'compress',
+      'methodOverride',
+      'poweredBy',
+      '$custom',
+      'router',
+      'www',
+      'favicon',
+      '404',
+      '500'
+    ],
 
   /****************************************************************************
   *                                                                           *
@@ -172,7 +173,7 @@ module.exports.http = {
 
     // bodyParser: require('skipper')
 
-  // },
+  }
 
   /***************************************************************************
   *                                                                          *

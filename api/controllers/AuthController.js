@@ -9,7 +9,23 @@ module.exports = {
 	},
 
 	signup: function(req, res) {
-		
+		var user = {};
+		user.firstName = req.body.firstName;
+		user.lastName = req.body.lastName;
+		user.email = req.body.email;
+		user.password = req.body.password;
+		User.create(user, function(err, user) {
+			if (err) {
+				return res.badRequest();
+			} 
+
+			if (req.wantsJSON) {
+				return res.json(user);
+			} 
+
+			req.user = user;
+	        res.redirect('/dashboard');
+		});
 	},
 	login: function(req, res) {
 		res.view();

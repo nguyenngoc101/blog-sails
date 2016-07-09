@@ -5,14 +5,18 @@
 			<a href="/auth/facebook">Connect with Facebook</a>
 		</div>
 	</div>
-	<div id="signup-form" class="line center">
-		<span class="horizonal-center">Or sign up with</span>
-		<input type="text" placeholder="First Name"></input>
-		<input type="text" placeholder="Last Name"></input>
-		<input type="text" placeholder="Email"></input>
-		<input type="password" placeholder="password"></input>
-	</div>
-	<div class="center">
-		<input type="submit" value="Sign Me Up"/>
+	<div>
+		<form action="/signup" method="post">
+			<div id="signup-form" class="line center">
+				<span class="horizonal-center">Or sign up with</span>
+				<input type="text" name="firstName" placeholder="First Name"></input>
+				<input type="text" name="lastName" placeholder="Last Name"></input>
+				<input type="text" name="email" placeholder="Email"></input>
+				<input type="password" name="password" placeholder="password"></input>
+			</div>
+			<div class="center">
+				<input type="submit" value="Sign Me Up"/>
+			</div>
+		</form>
 	</div>
 </div>

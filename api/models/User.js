@@ -21,9 +21,9 @@ module.exports = {
   	createdAt: 'date',
   	modifiedAt: 'date',
   	avatar: 'string'
-  },
+  }/*,*/
 
-  beforeCreate: function(user, cb) {
+  /*beforeCreate: function(user, cb) {
         bcrypt.genSalt(10, function(err, salt) {
             bcrypt.hash(user.password, salt, function(err, hash) {
                 if (err) {
@@ -35,6 +35,6 @@ module.exports = {
                 }
             });
         });
-    }
+    }*/
 };
 
