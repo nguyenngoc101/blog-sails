@@ -23,19 +23,23 @@ module.exports = {
 				return res.json(user);
 			} 
 
-			req.user = user;
+			req.session.user = user;
 	        res.redirect('/dashboard');
 		});
 	},
 	login: function(req, res) {
+		var user = {};
+
 		res.view();
 	},
 	logout: function(req, res) {
+		req.logout();
+		delete req.session;
 		res.redirect('/login');
 	},
 
 	dashboard: function(req, res) {
-		res.json(req.user);
+		res.json(req.session.user);
 	},
 
 	facebook: function (req, res, next) {
