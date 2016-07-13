@@ -28,9 +28,11 @@ module.exports = {
 		});
 	},
 	login: function(req, res) {
-		var user = {};
-
-		res.view();
+		var email = req.body.email;
+		var password = req.body.password;
+		User.findOne({email: email}, function(err, user) {
+			res.serverError("Server Error");
+		})
 	},
 	logout: function(req, res) {
 		req.logout();
